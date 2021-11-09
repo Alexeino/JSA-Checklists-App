@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Welcome to JSA App{% endblock page_title %}
+
+{% block content %}
+
+
+  <body>
+
+    <nav  class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/jsa.png' %}" width="35px;" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Create JSA</a>
+          </li>
+          {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link " href="#">Submit JSA</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </nav>
+
+    <!-- Type JSA Modal -->
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="typeJsa" tabindex="-1" role="dialog" aria-labelledby="typeJsaModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Please Select Check List</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+            <form action="" method="POST">
+              {% csrf_token %}
+              <li class="list-group-item"><button type="submit" name="checklist_select" value="opgw_checklist" class = "btn-link border-0 "> OPGW Cable Tower </button> </li>
+              <li class="list-group-item"><button type="submit" name="checklist_select" value="mw_checklist" class = "btn-link border-0 ">Working over M/W Tower</button></li>
+              <li class="list-group-item"><button type="submit" name="checklist_select" value="ofc_checklist" class = "btn-link border-0 ">Maintenance/Project Work of U/G OFC</button> </li>
+              <li class="list-group-item"><button type="submit" name="checklist_select" value="pole_checklist" class = "btn-link border-0 ">OFC/AMI over HT/LT Poles</button></li>
+            </form>
+            </ul> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main role="main" class="container p-0 text-lg-center">
+
+      <h2 class = "card-title text-center">Job Safety Analysis</h2>
+      <p class="text-center">
+        Job Safety Analysis (JSA) is a systematic procedure that breaks each job/task into key training sequences, identifies safety elements of each job/task step and coaches the employee on how to avoid potential safety hazards. Another commonly used term for this process is called a Job Hazard Analysis or JHA.
+      </p>
+      <div class="text-center">
+      <button type="submit" name="submit_jsa" data-toggle="modal" data-target="#typeJsa" class="btn btn-primary btn-lg">Submit JSA</button>
+      <button type="submit" name="view_jaa" class="btn btn-secondary btn-lg">View JSAs</button>
+      </div>
+    </main><!-- /.container -->
+
+
+    <script>
+    
+    </script>
+</body>
+
+{% endblock content %}
